@@ -8,6 +8,10 @@ Docker for Terrasic's Cyclone V SoC FPGA board: DE1-SoC
 yocto
 https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
+https://rocketboards.org/foswiki/view/Documentation/YoctoDoraBuildWithMetaAltera
+
+https://rocketboards.org/foswiki/view/Documentation/AlteraSoCDevelopmentBoardYoctoGettingStarted
+
 
 ## Build
 
@@ -25,14 +29,14 @@ $ docker images
     rubuschl/de1soc-buildroot 20191104161353      cbf4cb380168        24 minutes ago      10.5GB
     ubuntu                    xenial              5f2bf26e3524        4 days ago          123MB
 
-$ time docker run -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/mnt rubuschl/de1soc-buildroot:20191104161353
+$ time docker run -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/home/$USER/output rubuschl/de1soc-buildroot:20191104161353
 ```
 
 
 ## Debug
 
 ```
-$ docker run -ti --user=$USER:$USER --workdir=/home/$USER rubuschl/de1soc-buildroot:20191104161353 /bin/bash
+$ docker run -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/home/$USER/output rubuschl/de1soc-buildroot:20191104161353 /bin/bash
 ```
 
 
