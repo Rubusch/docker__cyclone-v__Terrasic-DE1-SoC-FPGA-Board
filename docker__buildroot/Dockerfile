@@ -60,10 +60,11 @@ RUN sed -i '/%sudo/s/.*/%sudo   ALL=NOPASSWD: ALL/' /etc/sudoers
 
 ################################################################################
 ## get (my) sources
-RUN git clone -j4 --depth=1 --branch lothar/cyclone-v-devel https://github.com/Rubusch/buildroot.git buildroot
+RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/cyclone-v-devel https://github.com/Rubusch/buildroot.git buildroot
 ## alternatively get official buildrooot
 #RUN git clone -j4 --depth=1 https://github.com/buildroot/buildroot.git buildroot
 
+RUN chown $USER:$USER -R /home/$USER
 
 ################################################################################
 ## command mode
