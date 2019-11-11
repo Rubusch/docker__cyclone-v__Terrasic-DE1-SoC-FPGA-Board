@@ -77,9 +77,9 @@ RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO git://git.openembedded.org
 RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5
 
 ## development: adjustable meta-layer
-RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/Rubusch/meta-altera.git
+RUN cd /home/$USER/poky && git clone -b master https://github.com/Rubusch/meta-altera.git
 ## or use original
-#RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/kraj/meta-altera.git
+#RUN cd /home/$USER/poky && git clone -b master https://github.com/kraj/meta-altera.git
 
 ## reset permissions
 RUN chown $USER:$USER -R /home/$USER
