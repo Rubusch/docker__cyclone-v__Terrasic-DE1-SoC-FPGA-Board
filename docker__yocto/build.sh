@@ -2,7 +2,7 @@
 ## resources:
 ## https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 export BUILDDIR=~/poky/build
-chown $(whoami):$(whoami) -R $BUILDDIR
+test -d $BUILDDIR && chown $(whoami):$(whoami) -R $BUILDDIR
 
 cd ~/poky
 source oe-init-build-env $BUILDDIR
