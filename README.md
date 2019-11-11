@@ -5,7 +5,8 @@ Docker for Terrasic's Cyclone V SoC FPGA board: DE1-SoC
 
 ## Resources
 
-yocto
+yocto  
+
 https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
 https://rocketboards.org/foswiki/view/Documentation/YoctoDoraBuildWithMetaAltera
