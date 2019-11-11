@@ -19,7 +19,6 @@ if [[ ! -f $BUILDDIR/conf/local.conf ]]; then
 
     ## adjust local.conf
     sed -i '/MACHINE ??= "qemux86"/s/.*/MACHINE ?= "cyclone5"/g' $BUILDDIR/conf/local.conf
-    echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera"' >> $BUILDDIR/conf/local.conf
     echo 'EXTRA_USERS_PARAMS = "usermod -P root root; "' >> $BUILDDIR/conf/local.conf
 fi
 
