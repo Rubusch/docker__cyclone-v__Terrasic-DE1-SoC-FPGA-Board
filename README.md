@@ -45,7 +45,10 @@ $ docker run -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/home/$
 
 ## Yocto
 
+CURRENTLY BROKEN - ```Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_compile) failed with exit code '1'```
+
 Using the kraj/meta-altera layer.
+
 
 ### Build
 
