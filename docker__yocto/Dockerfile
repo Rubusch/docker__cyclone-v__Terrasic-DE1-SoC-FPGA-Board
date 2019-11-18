@@ -74,7 +74,7 @@ RUN cd /home/$USER && git clone -b $BRANCH_YOCTO git://git.yoctoproject.org/poky
 
 RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO git://git.openembedded.org/meta-openembedded
 
-RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5
+RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5.git
 
 ## development: adjustable meta-layer
 RUN cd /home/$USER/poky && git clone -b master https://github.com/Rubusch/meta-altera.git
