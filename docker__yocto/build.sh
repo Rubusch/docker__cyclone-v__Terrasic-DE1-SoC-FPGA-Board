@@ -16,12 +16,20 @@ if [[ ! -f $BUILDDIR/conf/local.conf ]]; then
     #echo '  /home/user/poky/meta-altera \' >> $BUILDDIR/conf/bblayers.conf
     echo '  "' >> $BUILDDIR/conf/bblayers.conf
 
+    ## adjustments to local.conf
 
-    ## adjust local.conf
+    ## MACHINE
     sed -i '/MACHINE ??= "qemux86"/s/.*/MACHINE ?= "cyclone5"/g' $BUILDDIR/conf/local.conf
 
+    ## kernel
     echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera"' >> $BUILDDIR/conf/local.conf
     echo 'PREFERRED_VERSION_linux-altera = "4.17%"' >> $BUILDDIR/conf/local.conf
+
+    ## toolchain
+    ## alternatively (former old toolchain): ANGSTROM_GCC_VERSION_arm = "linaro-4.9%"
+    echo 'GCCVERSION = "linaro-5.2"' >> $BUILDDIR/conf/local.conf
+    echo 'SDKGCCVERSION = "linaro-5.2"' >> $BUILDDIR/conf/local.conf
+    echo 'DEFAULTTUNE = "cortexa9hf-neon"' >> $BUILDDIR/conf/local.conf
 
     echo 'EXTRA_USERS_PARAMS = "usermod -P root root; "' >> $BUILDDIR/conf/local.conf
 fi
