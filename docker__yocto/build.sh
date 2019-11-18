@@ -23,6 +23,8 @@ if [[ ! -f $BUILDDIR/conf/local.conf ]]; then
     ## MACHINE
     sed -i '/MACHINE ??= "qemux86"/s/.*/MACHINE ?= "cyclone5"/g' $BUILDDIR/conf/local.conf
 
+    sed -i '/PACKAGE_CLASSES ?= "package_rpm"/s/.*/PACKAGE_CLASSES ?= "package_deb"/g' $BUILDDIR/conf/local.conf
+
     ## kernel
 #    echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera"' >> $BUILDDIR/conf/local.conf
     echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera-ltsi"' >> $BUILDDIR/conf/local.conf
