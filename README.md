@@ -41,7 +41,11 @@ Append ``/bin/bash`` to the above for having a shell into a container instance.
 
 ## Yocto
 
-CURRENTLY BROKEN - ```Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_compile) failed with exit code '1'```
+CURRENTLY BROKEN - UNDER CONSTRUCTION  
+
+```
+Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_compile) failed with exit code '1'
+```
 
 Using the kraj/meta-altera layer.
 
