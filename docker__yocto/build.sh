@@ -5,7 +5,7 @@ export BUILDDIR=~/poky/build
 chown $(whoami):$(whoami) -R $BUILDDIR
 
 ## is this a rebuild? if not, init the confis
-if [[ ! -f $BUILDDIR/conf/local.conf ]]; then
+if [[ ! -f $BUILDDIR/conf/bblayers.conf ]]; then
     cd ~/poky
     source oe-init-build-env $BUILDDIR
 
@@ -15,14 +15,17 @@ if [[ ! -f $BUILDDIR/conf/local.conf ]]; then
     #sed -i '/  "/s/.*/  \/home\/user\/poky\/meta-openembedded \\/g' $BUILDDIR/conf/bblayers.conf
     #echo '  /home/user/poky/meta-altera \' >> $BUILDDIR/conf/bblayers.conf
     echo '  "' >> $BUILDDIR/conf/bblayers.conf
+fi
 
+if [[ ! -f $BUILDDIR/conf/local.conf ]]; then
     ## adjustments to local.conf
 
     ## MACHINE
     sed -i '/MACHINE ??= "qemux86"/s/.*/MACHINE ?= "cyclone5"/g' $BUILDDIR/conf/local.conf
 
     ## kernel
-    echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera"' >> $BUILDDIR/conf/local.conf
+#    echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera"' >> $BUILDDIR/conf/local.conf
+    echo 'PREFERRED_PROVIDER_virtual/kernel = "linux-altera-ltsi"' >> $BUILDDIR/conf/local.conf
     echo 'PREFERRED_VERSION_linux-altera = "4.17%"' >> $BUILDDIR/conf/local.conf
 
     ## toolchain
