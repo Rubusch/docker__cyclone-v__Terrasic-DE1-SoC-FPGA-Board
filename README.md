@@ -35,12 +35,8 @@ $ docker images
 $ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$USER/buildroot/output rubuschl/de1soc-buildroot:20191104161353
 ```
 
+Append ``/bin/bash`` to the above for having a shell into a container instance.
 
-### Debug
-
-```
-$ docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$USER/buildroot/output rubuschl/de1soc-buildroot:20191104161353 /bin/bash
-```
 
 
 ## Yocto
@@ -69,10 +65,5 @@ $ docker images
 $ time docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER --workdir=/home/$USER rubuschl/de1soc-yocto:20191104161353
 ```
 
-
-### Debug
-
-```
-$ docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER --workdir=/home/$USER rubuschl/de1soc-yocto:20191104161353 /bin/bash
-```
+Append ``/bin/bash`` to the above for having a debug shell into the container instance.
 
