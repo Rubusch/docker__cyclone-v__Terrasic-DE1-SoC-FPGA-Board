@@ -67,3 +67,7 @@ $ time docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER -
 
 Append ``/bin/bash`` to the above for having a debug shell into the container instance.
 
+Thoroughly clean yocto by removing
+* ``./output/sstate-cache``
+* ``./output/tmp``
+
