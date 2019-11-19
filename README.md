@@ -2,16 +2,22 @@
 
 Docker for Terrasic's Cyclone V SoC FPGA board: DE1-SoC
 
+![Cabeling](pics/setup.jpg)
+
+
 
 ## Resources
 
-yocto  
-
+yocto
 https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
 https://rocketboards.org/foswiki/view/Documentation/YoctoDoraBuildWithMetaAltera
 
 https://rocketboards.org/foswiki/view/Documentation/AlteraSoCDevelopmentBoardYoctoGettingStarted
+
+SoC FPGAs in general (community)
+https://rocketboards.org/
+
 
 
 ## Buildroot
@@ -41,11 +47,7 @@ Append ``/bin/bash`` to the above for having a shell into a container instance.
 
 ## Yocto
 
-CURRENTLY BROKEN - UNDER CONSTRUCTION  
 
-```
-Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_compile) failed with exit code '1'
-```
 
 Using the kraj/meta-altera layer.
 
@@ -74,4 +76,17 @@ Append ``/bin/bash`` to the above for having a debug shell into the container in
 Thoroughly clean yocto by removing
 * ``./output/sstate-cache``
 * ``./output/tmp``
+* ``$ find ./output -name \*.sock -delete``
+* remove local.conf and bblayers.conf
 
+
+## Issues
+
+* yocto: kernel fails to compile, dtb file missing
+```
+Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_compile) failed with exit code '1'
+```
+FIX: configure in the local.conf which specific dts / dtb (board) is needed exactly, the fall back tries to build all available in the meta-altera. All dts configs available in the meta-altera are not available in the kernel sources, though.
+
+
+* yocto: wic / wks settings are not working with cyclone5, try to turn the additional 'wic' stuff off in meta-altera
