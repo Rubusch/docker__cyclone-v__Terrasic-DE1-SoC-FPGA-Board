@@ -56,7 +56,7 @@ Using the kraj/meta-altera layer.
 
 ```
 $ cd ./docker__yocto/
-$ time docker build --build-arg USER=$USER -t rubuschl/de1soc-yocto:$(date +%Y%m%d%H%M%S) .
+$ time docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:$(date +%Y%m%d%H%M%S) .
 ```
 
 
@@ -71,13 +71,59 @@ $ docker images
 $ time docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER --workdir=/home/$USER rubuschl/de1soc-yocto:20191104161353
 ```
 
+
+### Build SDK
+
 Append ``/bin/bash`` to the above for having a debug shell into the container instance.
+
+```
+$ docker images
+    REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+    rubuschl/de1soc-yocto 20191104161353      cbf4cb380168        24 minutes ago      10.5GB
+    ubuntu                    xenial              5f2bf26e3524        4 days ago          123MB
+
+$ docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER --workdir=/home/$USER rubuschl/de1soc-yocto:20191104161353 /bin/bash
+
+docker$ sudo /usr/local/bin/build.sh
+   (...)
+   ## replace bitbake command with the following
+   bitbake meta-toolchain
+
+docker$ build.sh
+   (zzzZZZzz...)
+
+docker$ ./tmp/deploy/sdk/poky-glibc-x86_64-meta-toolchain-cortexa9hf-neon-vfpv4-toolchain-2.7.2.sh
+   e.g. to /opt/toolchain-poky-2.7.2
+```
+
+Inside the **same** session, you can compile as follows.
+
+```
+docker$  . /opt/toolchain/toolchain-poky-2.7.2/environment-setup-cortexa9hf-neon-vfpv4-poky-linux-gnueabi
+
+docker$ ${CC} hello.c -o hello.exe
+```
+
+Alternatively use a Makefile and inside work with variable _CC_. A direct call to ``arm-gnueabi...-gcc`` will not work with yocto built toolchains. It is supposed to use common Make compile variables, such as _CC_ or Makefiles directly.
+
+
+
+### SD Card
+
+TODO
+
+
+
+### Clean
 
 Thoroughly clean yocto by removing
 * ``./output/sstate-cache``
 * ``./output/tmp``
 * ``$ find ./output -name \*.sock -delete``
 * remove local.conf and bblayers.conf
+
+
+
 
 
 ## Issues
