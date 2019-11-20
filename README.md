@@ -72,7 +72,7 @@ $ time docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER -
 ```
 
 
-### Build SDK
+### Build Toolchain (SDK)
 
 Append ``/bin/bash`` to the above for having a debug shell into the container instance.
 
@@ -134,5 +134,4 @@ Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_co
 ```
 FIX: configure in the local.conf which specific dts / dtb (board) is needed exactly, the fall back tries to build all available in the meta-altera. All dts configs available in the meta-altera are not available in the kernel sources, though.
 
-
-* yocto: wic / wks settings are not working with cyclone5, try to turn the additional 'wic' stuff off in meta-altera
+* yocto: the wks file declared for cyclone5 (wic, i.e. partition layout), refers a fit/spl file for u-boot, which is not built for cyclone5 automatically and still needs fixes for cyclone5
