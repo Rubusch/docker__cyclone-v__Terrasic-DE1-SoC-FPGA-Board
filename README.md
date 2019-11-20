@@ -51,6 +51,7 @@ Append ``/bin/bash`` to the above for having a shell into a container instance.
 ## Yocto
 
 
+UNDER CONSTRUCTION
 
 Using the kraj/meta-altera layer.
 
@@ -113,6 +114,8 @@ Alternatively use a Makefile and inside work with variable _CC_. A direct call t
 
 
 ### SD Card
+
+UNDER CONSTRUCTION
 
 Fetch a separate clone of the u-boot-socfpga repo, and build it inside the docker container with the installed toolchain.
 
