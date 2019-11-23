@@ -4,22 +4,12 @@
 export BUILDDIR=~/poky/build
 chown $(whoami):$(whoami) -R $BUILDDIR
 
-## backup and wipe out configs (automatic build
-test -f $BUILDDIR/conf/bblayers.conf && cp -arf $BUILDDIR/conf/bblayers.conf{,.orig}
-test -f $BUILDDIR/conf/local.conf && cp -arf $BUILDDIR/conf/local.conf{,.orig}
-rm -f $BUILDDIR/conf/bblayers.conf
-rm -f $BUILDDIR/conf/local.conf
+## config files
+cp -arf /home/$(whoami)/poky/meta-lothars-configs/conf/bblayers.conf.sample ${BUILDDIR}/conf/bblayers.conf
+#cp -arf /home/$(whoami)/poky/meta-lothars-configs/conf/local.conf.sample ${BUILDDIR}/conf/local.conf
 
 cd ~/poky
 source oe-init-build-env $BUILDDIR
-
-## adjust bblayers.conf
-sed -i '/  "/s/.*/  \/home\/user\/poky\/meta-altera \\/g' $BUILDDIR/conf/bblayers.conf
-## using meta-openembedded - why?
-#sed -i '/  "/s/.*/  \/home\/user\/poky\/meta-openembedded \\/g' $BUILDDIR/conf/bblayers.conf
-#echo '  /home/user/poky/meta-altera \' >> $BUILDDIR/conf/bblayers.conf
-echo '  "' >> $BUILDDIR/conf/bblayers.conf
-
 
 ## adjustments to local.conf
 

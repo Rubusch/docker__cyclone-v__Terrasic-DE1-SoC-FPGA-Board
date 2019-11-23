@@ -82,7 +82,7 @@ RUN cd /home/$USER/poky && git clone -b lothar/develop https://github.com/Rubusc
 #RUN cd /home/$USER/poky && git clone -b master https://github.com/kraj/meta-altera.git
 
 COPY meta-lothars-configs /home/$USER/poky/
-
+RUN sed -i "s/user/$USER/g" /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
 
 ## reset permissions
 RUN chown $USER:$USER -R /home/$USER
