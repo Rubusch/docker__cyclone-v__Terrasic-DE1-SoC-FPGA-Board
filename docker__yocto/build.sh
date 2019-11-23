@@ -45,8 +45,8 @@ echo 'EXTRA_USERS_PARAMS = "usermod -P root root; "' >> $BUILDDIR/conf/local.con
 ## uboot setup
 #echo 'UBOOT_CONFIG = "cyclone5-socrates"' >> $BUILDDIR/conf/local.conf
 echo 'UBOOT_CONFIG = "socfpga_cyclone5_defconfig"' >> $BUILDDIR/conf/local.conf
-#echo 'KERNEL_DEVICETREE = "socfpga_cyclone5_socrates.dtb"' >> $BUILDDIR/conf/local.conf
-#echo 'UBOOT_EXTLINUX_FDT_default ?= "../socfpga_cyclone5_socrates.dtb"' >> $BUILDDIR/conf/local.conf
+echo 'KERNEL_DEVICETREE = "socfpga_cyclone5_socrates.dtb"' >> $BUILDDIR/conf/local.conf
+#echo 'UBOOT_EXTLINUX_FDT_default ?= "socfpga_cyclone5_de1_soc.dtb"' >> $BUILDDIR/conf/local.conf
 
 
 ## source again, before start building
