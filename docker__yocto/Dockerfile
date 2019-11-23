@@ -81,6 +81,9 @@ RUN cd /home/$USER/poky && git clone -b lothar/develop https://github.com/Rubusc
 ## or use original
 #RUN cd /home/$USER/poky && git clone -b master https://github.com/kraj/meta-altera.git
 
+COPY meta-lothars-configs /home/$USER/poky/
+
+
 ## reset permissions
 RUN chown $USER:$USER -R /home/$USER
 
