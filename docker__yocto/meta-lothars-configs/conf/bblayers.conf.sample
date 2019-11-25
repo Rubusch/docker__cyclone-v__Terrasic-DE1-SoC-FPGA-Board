@@ -9,6 +9,5 @@ BBLAYERS ?= " \
   /home/user/poky/meta \
   /home/user/poky/meta-poky \
   /home/user/poky/meta-yocto-bsp \
-  /home/user/poky/meta-altera \
   /home/user/poky/meta-lothars-configs \
   "
