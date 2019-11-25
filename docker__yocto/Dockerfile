@@ -77,12 +77,14 @@ RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO git://git.openembedded.org
 RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5.git
 
 ## development: adjustable meta-layer
-RUN cd /home/$USER/poky && git clone -b lothar/develop https://github.com/Rubusch/meta-altera.git
+# TODO remove this, in 2019 mainline kernel & u-boot should support all needed things for altera
+#RUN cd /home/$USER/poky && git clone -b lothar/develop https://github.com/Rubusch/meta-altera.git
 ## or use original
 #RUN cd /home/$USER/poky && git clone -b master https://github.com/kraj/meta-altera.git
 
-COPY meta-lothars-configs /home/$USER/poky/
-RUN sed -i "s/user/$USER/g" /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
+# TODO
+#COPY meta-lothars-configs /home/$USER/poky/
+#RUN sed -i "s/user/$USER/g" /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
 
 ## reset permissions
 RUN chown $USER:$USER -R /home/$USER
