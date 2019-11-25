@@ -8,7 +8,7 @@ Docker for Terrasic's Cyclone V SoC FPGA board: DE1-SoC
 
 ## Resources
 
-yocto
+yocto (old)
 https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
 https://rocketboards.org/foswiki/view/Documentation/YoctoDoraBuildWithMetaAltera
@@ -53,7 +53,7 @@ Append ``/bin/bash`` to the above for having a shell into a container instance.
 
 UNDER CONSTRUCTION
 
-Using the kraj/meta-altera layer.
+Using the kraj/meta-altera layer is the valid legacy setup, but nowadays not needed anymore. In the year of our Lord 2019, Linux mainline (5.2.x) and Das U-Boot (2019.x) have full support for the DE1-SoC Board's Cyclone V.
 
 
 ### Build
