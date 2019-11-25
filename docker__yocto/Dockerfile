@@ -83,8 +83,8 @@ RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/meta-qt
 #RUN cd /home/$USER/poky && git clone -b master https://github.com/kraj/meta-altera.git
 
 # provide proper config in own meta layer
-COPY meta-lothars-configs /home/$USER/poky/
-RUN sed -i "s/user/$USER/g" /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
+COPY meta-lothars-configs /home/$USER/poky/meta-lothars-configs
+RUN sed "s/~/\/home\/$USER/g" -i /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
 
 ## reset permissions
 RUN chown $USER:$USER -R /home/$USER
