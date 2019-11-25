@@ -266,7 +266,4 @@ DEFAULTTUNE = "cortexa9hf-neon"
 EXTRA_USERS_PARAMS = "usermod -P root root; "
 
 UBOOT_CONFIG = "socfpga_cyclone5_defconfig"
-
-KERNEL_DEVICETREE = "socfpga_cyclone5_socrates.dtb"
-
-UBOOT_EXTLINUX_FDT_default ?= "../socfpga_cyclone5_socrates.dtb"
+#UBOOT_EXTLINUX_FDT_default ?= "../socfpga_cyclone5_socrates.dtb"
