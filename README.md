@@ -53,7 +53,10 @@ Append ``/bin/bash`` to the above for having a shell into a container instance.
 
 UNDER CONSTRUCTION
 
-Using the kraj/meta-altera layer is the valid legacy setup, but nowadays not needed anymore. In the year of our Lord 2019, Linux mainline (5.2.x) and Das U-Boot (2019.x) have full support for the DE1-SoC Board's Cyclone V.
+Using the kraj/meta-altera layer is the valid legacy setup. Nowadays the Linux mainline (5.2.x) and Das U-Boot (2019.x) have full support for the DE1-SoC Board's Cyclone V. Though the meta-altera does the setup for MACHINE "cyclone5".  
+
+It is fine for ``bitbake meta-toolchain``, but won't build the image (no correct u-boot settings, thus no spl and yocto stops at bundling the wic image) - FIXME.
+
 
 
 ### Build
