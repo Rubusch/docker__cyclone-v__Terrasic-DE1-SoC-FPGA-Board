@@ -96,10 +96,11 @@ $ docker images
 
 $ docker run -ti -v $PWD/output:/home/$USER/poky/build --user=$USER:$USER --workdir=/home/$USER rubuschl/de1soc-yocto:20191104161353 /bin/bash
 
-docker$ sudo /usr/local/bin/build.sh
+docker$ sudo vi /usr/local/bin/build.sh
    (...)
    ## replace bitbake command with the following
    bitbake meta-toolchain
+   (...)
 
 docker$ build.sh
    (zzzZZZzz...)
