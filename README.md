@@ -66,6 +66,11 @@ $ cd ./docker__yocto/
 $ time docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:$(date +%Y%m%d%H%M%S) .
 ```
 
+In case of re-building, make sure to clean sufficiently before:
+```
+$ rm -rf ./output/tmp/ ./output/bitbake.lock ./output/bitbake.sock
+```
+
 
 ### Usage
 
