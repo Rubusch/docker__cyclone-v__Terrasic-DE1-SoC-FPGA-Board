@@ -55,7 +55,7 @@ UNDER CONSTRUCTION
 
 Using the kraj/meta-altera layer is the valid legacy setup. Nowadays the Linux mainline (5.2.x) and Das U-Boot (2019.x) have full support for the DE1-SoC Board's Cyclone V. Though the meta-altera does the setup for MACHINE "cyclone5".  
 
-It is fine for ``bitbake meta-toolchain``, but won't build the image (no correct u-boot settings, thus no spl and yocto stops at bundling the wic image) - FIXME.
+It is fine for ``bitbake meta-toolchain``, but won't build the image (no correct u-boot settings, thus no spl and yocto stops at bundling the wic image) - FIXME.  
 
 
 
@@ -66,13 +66,13 @@ $ cd ./docker__yocto/
 $ time docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:$(date +%Y%m%d%H%M%S) .
 ```
 
-In case of re-building, make sure to clean sufficiently before:
+In case of re-building, make sure to clean sufficiently before:  
+
 ```
 $ rm -rf ./output/tmp/ ./output/bitbake.lock ./output/bitbake.sock
 ```
 
-
-### Usage
+Figure out the docker tag, and append the docker tag as follows to build the image for the board.  
 
 ```
 $ docker images
