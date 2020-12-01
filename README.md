@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/Rubusch/docker__cyclone-v__de1-soc-fpga.svg?style=shield)](https://circleci.com/gh/Rubusch/docker__cyclone-v__de1-soc-fpga)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+
+
 # Container for my Terrasic DE1-SoC FPGA Board (Altera Cyclone V)
 
 Docker for Terrasic's Cyclone V SoC FPGA board: DE1-SoC
