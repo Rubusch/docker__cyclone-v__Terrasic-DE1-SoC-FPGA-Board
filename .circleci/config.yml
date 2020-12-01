@@ -9,6 +9,6 @@ jobs:
      - run: cd ./docker__buildroot && docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-buildroot:123 .
      - run: cd ./docker__buildroot && docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$(whoami)/buildroot/output rubuschl/de1soc-buildroot:123
 
-	 # yocto
+     # yocto
      - run: cd ./docker__yocto && docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:456 .
-	 - run: cd ./docker__yocto && docker run --rm -ti --user=$USER:$USER -v $PWD/output:/home/$USER/poky/build --workdir=/home/$USER rubuschl/de1soc-yocto:456
+     - run: cd ./docker__yocto && docker run --rm -ti --user=$USER:$USER -v $PWD/output:/home/$USER/poky/build --workdir=/home/$USER rubuschl/de1soc-yocto:456
