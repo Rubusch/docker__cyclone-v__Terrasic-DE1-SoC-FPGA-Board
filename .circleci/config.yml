@@ -9,4 +9,4 @@ jobs:
      - run: cd ./docker__buildroot && docker build --build-arg USER=$(whoami) -t rubuschl/de1soc-buildroot:123 .
      #- run: cd ./docker && docker run --rm -ti --user=$USER:$(whoami) --workdir=/home/$(whoami) -v $PWD/dl:/home/$(whoami)/buildroot/dl -v $PWD/output:/home/$(whoami)/buildroot/output rubuschl/de1soc-buildroot:123
 
-     - run: cd ./docker__yocto && ocker build --no-cache --build-arg USER=$(whoami) -t rubuschl/de1soc-yocto:456 .
+     - run: cd ./docker__yocto && docker build --no-cache --build-arg USER=$(whoami) -t rubuschl/de1soc-yocto:456 .
