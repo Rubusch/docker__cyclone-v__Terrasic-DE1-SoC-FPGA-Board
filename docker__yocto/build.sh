@@ -1,9 +1,13 @@
 #!/bin/bash -e
 ## resources:
 ## https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
-export YOCTODIR="/home/$(whoami)/poky"
+
+export MY_HOME="$(pwd)"
+export USER="$(whoami)"
+export YOCTODIR="${MY_HOME}/poky"
 export BUILDDIR="${YOCTODIR}/build"
-chown $(whoami):$(whoami) -R $BUILDDIR
+
+sudo chown ${USER}:${USER} -R ${BUILDDIR}
 
 ## source again, before start building
 cd ${YOCTODIR}
@@ -18,3 +22,6 @@ sed "s/  ~\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILDDIR}/conf/bblayers.c
 
 ## build
 bitbake core-image-minimal
+
+echo "READY."
+echo
