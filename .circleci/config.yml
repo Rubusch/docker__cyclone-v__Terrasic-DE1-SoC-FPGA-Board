@@ -5,10 +5,10 @@ jobs:
    steps:
      - checkout
 
-     # build the application image
-     - run: cd ./docker__buildroot && docker build --build-arg USER=$(whoami) -t rubuschl/de1soc-buildroot:123 .
+     # buildroot
+     - run: cd ./docker__buildroot && docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-buildroot:123 .
+     - run: cd ./docker__buildroot && docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$(whoami)/buildroot/output rubuschl/de1soc-buildroot:123
 
-     ## TODO the following needs fix (permissions in mounted folder, to be set in build.sh)
-     #- run: cd ./docker__buildroot && docker run --rm -ti --user=$USER:$(whoami) --workdir=/home/$(whoami) -v $PWD/dl:/home/$(whoami)/buildroot/dl -v $PWD/output:/home/$(whoami)/buildroot/output rubuschl/de1soc-buildroot:123
-
-     - run: cd ./docker__yocto && docker build --no-cache --build-arg USER=$(whoami) -t rubuschl/de1soc-yocto:456 .
+	 # yocto
+     - run: cd ./docker__yocto && docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:456 .
+	 - run: cd ./docker__yocto && docker run --rm -ti --user=$USER:$USER -v $PWD/output:/home/$USER/poky/build --workdir=/home/$USER rubuschl/de1soc-yocto:456
