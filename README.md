@@ -36,7 +36,7 @@ $ cd ./docker__buildroot/
 $ time docker build --build-arg USER=$USER -t rubuschl/de1soc-buildroot:$(date +%Y%m%d%H%M%S) .
 ```
 
-Use the docker tag and append the docker tag to the docker run command in order to build the image for the board as follows.
+Use the docker tag and append the docker tag to the docker run command in order to build the image for the board as follows.  
 
 ```
 $ docker images
@@ -47,14 +47,11 @@ $ docker images
 $ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$USER/buildroot/output rubuschl/de1soc-buildroot:20191104161353
 ```
 
-Append ``/bin/bash`` to the above for having a shell into a container instance.
+Append ``/bin/bash`` to the above for having a shell into a container instance.  
 
 
 
 ## Yocto
-
-
-UNDER CONSTRUCTION
 
 Using the kraj/meta-altera layer is the valid legacy setup. Nowadays the Linux mainline (5.2.x) and Das U-Boot (2019.x) have full support for the DE1-SoC Board's Cyclone V. Though the meta-altera does the setup for MACHINE "cyclone5".  
 
@@ -89,7 +86,7 @@ $ docker run -ti --rm --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/h
 
 ### Build Toolchain (SDK)
 
-Append/keep the ``/bin/bash`` to the above for having a debug shell into the container instance.
+Append/keep the ``/bin/bash`` to the above for having a debug shell into the container instance.  
 
 ```
 $ docker images
@@ -109,7 +106,7 @@ docker$ build.sh
    (zzzZZZzz...)
 ```
 
-Inside the **same** session, you can compile as follows.
+Inside the **same** session, you can compile as follows.  
 
 ```
 docker$ ~/poky/build/tmp/deploy/sdk/poky-glibc-x86_64-meta-toolchain-cortexa9hf-neon-cyclone5-toolchain-2.7.2.sh
@@ -121,15 +118,15 @@ docker$ . /opt/toolchain-poky-2.7.2/environment-setup-cortexa9hf-neon-poky-linux
 docker$ ${CC} hello.c -o hello.exe
 ```
 
-Alternatively use a Makefile and inside work with variable _CC_. A direct call to ``arm-gnueabi...-gcc`` will not work with yocto built toolchains. It is supposed to use common Make compile variables, such as _CC_ or Makefiles directly.
+Alternatively use a Makefile and inside work with variable _CC_. A direct call to ``arm-gnueabi...-gcc`` will not work with yocto built toolchains. It is supposed to use common Make compile variables, such as _CC_ or Makefiles directly.  
 
 
 
 ### SD Card
 
-UNDER CONSTRUCTION
+UNDER CONSTRUCTION  
 
-Fetch a separate clone of the u-boot-socfpga repo, and build it inside the docker container with the installed toolchain.
+Fetch a separate clone of the u-boot-socfpga repo, and build it inside the docker container with the installed toolchain.  
 
 ```
 $ cd output
@@ -137,7 +134,7 @@ $ cd output
 $ git clone https://github.com/altera-opensource/u-boot-socfpga.git
 ```
 
-Load container and install sdk toolchain, example tag **20191104161353**
+Load container and install sdk toolchain, example tag **20191104161353**  
 
 ```
 $ docker images
@@ -154,7 +151,8 @@ docker$ ~/poky/build/tmp/deploy/sdk/poky-glibc-x86_64-meta-toolchain-cortexa9hf-
 docker$ . /opt/toolchain-poky-2.7.2/environment-setup-cortexa9hf-neon-poky-linux-gnueabi
 ```
 
-Change into u-boot-socfpga and build it, this will generate the correct spl and image files
+Change into u-boot-socfpga and build it, this will generate the correct spl and image files  
+
 ```
 docker$ cd ~/poky/build/u-boot-socfpga
 
@@ -171,7 +169,7 @@ docker$ make -j8
 
 ### Clean
 
-Thoroughly clean yocto by removing
+Thoroughly clean yocto by removing  
 * ``./output/sstate-cache``
 * ``./output/tmp``
 * ``$ find ./output -name \*.sock -delete``
@@ -181,10 +179,12 @@ Thoroughly clean yocto by removing
 
 ## Issues
 
-* yocto: kernel fails to compile, dtb file missing
+* yocto: kernel fails to compile, dtb file missing  
+
 ```
 Task (/home/user/poky/meta-altera/recipes-kernel/linux/linux-altera_5.2.bb:do_compile) failed with exit code '1'
 ```
-FIX: configure in the local.conf which specific dts / dtb (board) is needed exactly, the fall back tries to build all available in the meta-altera. All dts configs available in the meta-altera are not available in the kernel sources, though.
 
-* yocto: the wks file declared for cyclone5 (wic, i.e. partition layout), refers a fit/spl file for u-boot, which is not built for cyclone5 automatically and still needs fixes for cyclone5
+FIX: configure in the local.conf which specific dts / dtb (board) is needed exactly, the fall back tries to build all available in the meta-altera. All dts configs available in the meta-altera are not available in the kernel sources, though.  
+
+* yocto: the wks file declared for cyclone5 (wic, i.e. partition layout), refers a fit/spl file for u-boot, which is not built for cyclone5 automatically and still needs fixes for cyclone5  
