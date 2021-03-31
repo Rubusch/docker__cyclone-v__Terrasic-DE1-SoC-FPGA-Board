@@ -27,28 +27,33 @@ SoC FPGA U-Boot
 https://github.com/altera-opensource/u-boot-socfpga.git
 
 
+## Tools Needed
+
+```
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo chmod a+x /usr/local/bin/docker-compose
+```
+
+NB: Where 1.28.6 is the latest version (currently not supported by devian/ubuntu package management)  
+
+
 ## Buildroot
 
 ### Build
 
 ```
 $ cd ./docker__buildroot/
-$ time docker build --build-arg USER=$USER -t rubuschl/de1soc-buildroot:$(date +%Y%m%d%H%M%S) .
+$ docker-compose up
 ```
 
-Use the docker tag and append the docker tag to the docker run command in order to build the image for the board as follows.  
+
+### USAGE
 
 ```
-$ docker images
-    REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/de1soc-buildroot 20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ubuntu                    xenial              5f2bf26e3524        4 days ago          123MB
+$ docker-compose -f ./docker-compose.yml run --rm rpi3b_buildroot /bin/bash
 
-$ time docker run --rm -ti --user=$USER:$USER --workdir=/home/$USER -v $PWD/dl:/home/$USER/buildroot/dl -v $PWD/output:/home/$USER/buildroot/output rubuschl/de1soc-buildroot:20191104161353
+$ build.sh
 ```
-
-Append ``/bin/bash`` to the above for having a shell into a container instance.  
-
 
 
 ## Yocto

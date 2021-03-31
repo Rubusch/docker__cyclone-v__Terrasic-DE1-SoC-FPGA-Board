@@ -1,6 +1,5 @@
 FROM ubuntu:20.04
 MAINTAINER Lothar Rubusch <lotophagon@protonmail.com>
-WORKDIR /root
 ENV DEBIAN_FRONTEND=noninteractive
 
 
@@ -8,9 +7,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 ## the USER is needed to make it available as --build-arg
 ## in case docker complains for a not set USER, perhaps you forgot to use --build-arg USER=$USER
 ARG USER=""
+ARG BRANCH_USER="lothar/cyclone-v-devel"
 
 
 ################################################################################
+## package manager
+
+## (opt) fix for sporadic problems like: "Not Found [IP: 91.189.88.152 80]"
+#RUN sed -i'' 's/archive.ubuntu.com/us.archive.ubuntu.com/' /etc/apt/sources.list
+RUN sed -i'' 's/archive.ubuntu.com/ubuntu.ethz.ch/' /etc/apt/sources.list
+
 ## set up apt fully functional
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge
 RUN apt-get install -y  \
@@ -33,9 +39,7 @@ RUN apt-get install -y  \
         python \
         bzip2 \
         libssl-dev \
-        locales
-
-RUN apt-get install -y \
+        locales \
         bc \
         cpio \
         rsync \
@@ -56,15 +60,18 @@ ENV LC_ALL en_US.UTF-8
 RUN useradd "$USER" -m --password "$USER"
 RUN usermod -a -G sudo "$USER"
 RUN sed -i '/%sudo/s/.*/%sudo   ALL=NOPASSWD: ALL/' /etc/sudoers
+RUN chown $USER:$USER -R /home/$USER
 
 
 ################################################################################
 ## get (my) sources
-RUN cd /home/$USER && git clone -j4 --depth=1 --branch lothar/cyclone-v-devel https://github.com/Rubusch/buildroot.git buildroot
+USER $USER
+
+WORKDIR /home/$USER
+RUN git clone -j4 --depth=1 --branch ${BRANCH_USER} https://github.com/Rubusch/buildroot.git buildroot
 ## alternatively get official buildrooot
 #RUN git clone -j4 --depth=1 https://github.com/buildroot/buildroot.git buildroot
 
-RUN chown $USER:$USER -R /home/$USER
 
 ################################################################################
 ## command mode
