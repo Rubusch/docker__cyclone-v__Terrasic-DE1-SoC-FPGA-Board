@@ -13,7 +13,7 @@ services:
         user: $USER
         stdin_open: true          ## docker run -i
         tty: true                 ## docker run -t
-        workin_dir: /home/$USER
+        working_dir: /home/$USER
         #privileged: true
 
         environment:
