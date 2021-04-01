@@ -68,7 +68,7 @@ It is fine for ``bitbake meta-toolchain``, but won't build the image (no correct
 
 ```
 $ cd ./docker__yocto/
-$ time docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:$(date +%Y%m%d%H%M%S) .
+$ docker-compose up
 ```
 
 In case of a re-build, make sure to clean sufficiently before  

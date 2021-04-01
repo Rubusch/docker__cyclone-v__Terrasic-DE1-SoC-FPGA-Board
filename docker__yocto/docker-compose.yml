@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+    de1soc_yocto:
+        container_name: de1soc_yocto
+        image: rubuschl/de1soc_yocto
+        build:
+            context: build_context
+            dockerfile: Dockerfile
+            args:
+                USER: $USER
+
+        user: $USER
+        stdin_open: true          ## docker run -i
+        tty: true                 ## docker run -t
+        workin_dir: /home/$USER
+        #privileged: true
+
+        environment:
+          - USER
+
+        volumes:
+          - ./output:/home/$USER/poky/build ## folder does not need to be around,
