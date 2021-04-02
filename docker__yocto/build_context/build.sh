@@ -29,7 +29,7 @@ sed "s/  ~\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILD_DIR}/conf/bblayers.
 ## build
 cd ${YOCTO_DIR}
 source oe-init-build-env $BUILD_DIR
-bitbake core-image-minimal
+bitbake core-image-minimal || exit 1
 
 echo "READY."
 echo
