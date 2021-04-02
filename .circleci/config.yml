@@ -13,5 +13,4 @@ jobs:
      - run: cd ./docker__buildroot && docker-compose up
 
      # yocto
-     - run: cd ./docker__yocto && docker build --no-cache --build-arg USER=$USER -t rubuschl/de1soc-yocto:456 .
-     - run: cd ./docker__yocto && docker run --rm -ti --user=$USER:$USER -v $PWD/output:/home/$USER/poky/build --workdir=/home/$USER rubuschl/de1soc-yocto:456
+     - run: cd ./docker__yocto && docker-compose up
