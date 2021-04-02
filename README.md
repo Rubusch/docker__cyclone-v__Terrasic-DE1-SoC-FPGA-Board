@@ -50,7 +50,7 @@ $ docker-compose up
 ### USAGE
 
 ```
-$ docker-compose -f ./docker-compose.yml run --rm rpi3b_buildroot /bin/bash
+$ docker-compose -f ./docker-compose.yml run --rm de1soc_buildroot /bin/bash
 
 $ build.sh
 ```
