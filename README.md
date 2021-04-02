@@ -77,41 +77,11 @@ In case of a re-build, make sure to clean sufficiently before
 $ rm -rf ./output/tmp/ ./output/bitbake.lock ./output/bitbake.sock
 ```
 
-Example tag **20191104161353**
-
 ```
-$ docker images
-    REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/de1soc-yocto     20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ...
-
-$ docker run -ti --rm --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/home/$USER/poky/build rubuschl/de1soc-yocto:20191104161353 /bin/bash
+$ docker-compose -f ./docker-compose.yml run --rm de1soc_yocto /bin/bash
 ```
 
-
-### Build Toolchain (SDK)
-
-Append/keep the ``/bin/bash`` to the above for having a debug shell into the container instance.  
-
-```
-$ docker images
-    REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/de1soc-yocto 20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ubuntu                    xenial              5f2bf26e3524        4 days ago          123MB
-
-$ docker run -ti --rm --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/home/$USER/poky/build rubuschl/de1soc-yocto:20191104161353 /bin/bash
-
-docker$ sudo vi /usr/local/bin/build.sh
-   (...)
-   ## replace bitbake command with the following
-   bitbake meta-toolchain
-   (...)
-
-docker$ build.sh
-   (zzzZZZzz...)
-```
-
-Inside the **same** session, you can compile as follows.  
+**yocto SDK** - Inside the **same** session, you can compile as follows.  
 
 ```
 docker$ ~/poky/build/tmp/deploy/sdk/poky-glibc-x86_64-meta-toolchain-cortexa9hf-neon-cyclone5-toolchain-2.7.2.sh
@@ -142,12 +112,8 @@ $ git clone https://github.com/altera-opensource/u-boot-socfpga.git
 Load container and install sdk toolchain, example tag **20191104161353**  
 
 ```
-$ docker images
-    REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-    rubuschl/de1soc-yocto     20191104161353      cbf4cb380168        24 minutes ago      10.5GB
-    ...
+$ docker-compose -f ./docker-compose.yml run --rm de1soc_yocto /bin/bash
 
-$ docker run -ti --rm --user=$USER:$USER --workdir=/home/$USER -v $PWD/output:/home/$USER/poky/build rubuschl/de1soc-yocto:20191104161353 /bin/bash
 
 docker$ ~/poky/build/tmp/deploy/sdk/poky-glibc-x86_64-meta-toolchain-cortexa9hf-neon-cyclone5-toolchain-2.7.2.sh
    > /opt/toolchain-poky-2.7.2
