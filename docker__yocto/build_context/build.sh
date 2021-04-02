@@ -15,7 +15,7 @@ for item in ${BUILD_DIR} ${YOCTO_DIR}; do
     fi
 done
 
-## source, to provide environment - SOURCE AGAIN BEFORE BUILD
+## source, to provide environment
 cd ${YOCTO_DIR}
 source oe-init-build-env $BUILD_DIR
 
@@ -27,8 +27,7 @@ cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/local.conf.sample ${BUILD_DIR}/co
 sed "s/  ~\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILD_DIR}/conf/bblayers.conf
 
 ## build
-cd ${YOCTO_DIR}
-source oe-init-build-env $BUILD_DIR
+cd ${BUILD_DIR}
 bitbake core-image-minimal || exit 1
 
 echo "READY."
