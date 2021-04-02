@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 MAINTAINER Lothar Rubusch <lotophagon@protonmail.com>
 WORKDIR /root
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,10 +10,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG USER=""
 
 ## the yocto branch
-ARG BRANCH_YOCTO="warrior"
+ARG BRANCH_YOCTO="dunfell"
 
 
 ################################################################################
+## set up apt fully functional
+
+## (opt) fix for sporadic problems like: "Not Found [IP: 91.189.88.152 80]"
+#RUN sed -i'' 's/archive.ubuntu.com/us.archive.ubuntu.com/' /etc/apt/sources.list
+RUN sed -i'' 's/archive.ubuntu.com/ubuntu.ethz.ch/' /etc/apt/sources.list
+
 ## set up apt fully functional
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove -y --purge
 RUN apt-get install -y  \
@@ -41,10 +47,7 @@ RUN apt-get install -y  \
     cpio \
     rsync \
     wget \
-    git-core
-
-## (opt) tools for debugging and working, e.g. X11-apps for testing the xserver via xclock
-RUN apt-get install -y   \
+    git-core \
     vim \
     screen \
     minicom \
@@ -66,27 +69,30 @@ ENV LC_ALL en_US.UTF-8
 RUN useradd "$USER" -m --password "$USER"
 RUN usermod -a -G sudo "$USER"
 RUN sed -i '/%sudo/s/.*/%sudo   ALL=NOPASSWD: ALL/' /etc/sudoers
+## reset permissions
+RUN chown $USER:$USER -R /home/$USER
 
 
 ################################################################################
 ## get sources
-RUN cd /home/$USER && git clone -b $BRANCH_YOCTO git://git.yoctoproject.org/poky poky
+USER $USER
 
-RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO git://git.openembedded.org/meta-openembedded
+WORKDIR /home/$USER
+RUN git clone -b $BRANCH_YOCTO git://git.yoctoproject.org/poky poky
 
-RUN cd /home/$USER/poky && git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5.git
+WORKDIR /home/$USER/poky
+RUN git clone -b $BRANCH_YOCTO git://git.openembedded.org/meta-openembedded
+RUN git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5.git
 
 ## development: adjustable meta-layer
-RUN cd /home/$USER/poky && git clone -b lothar/develop https://github.com/Rubusch/meta-altera.git
+RUN git clone -b lothar/dunfell https://github.com/Rubusch/meta-altera.git
 ## or use original
-#RUN cd /home/$USER/poky && git clone -b master https://github.com/kraj/meta-altera.git
+#RUN git clone -b master https://github.com/kraj/meta-altera.git
 
 # provide proper config in own meta layer
 COPY meta-lothars-configs /home/$USER/poky/meta-lothars-configs
+RUN sudo chown $USER:$USER -R /home/$USER/poky
 RUN sed "s/~/\/home\/$USER/g" -i /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
-
-## reset permissions
-RUN chown $USER:$USER -R /home/$USER
 
 
 ################################################################################
