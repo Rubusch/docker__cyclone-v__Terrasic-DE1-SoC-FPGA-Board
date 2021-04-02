@@ -20,4 +20,4 @@ services:
           - USER
 
         volumes:
-          - ./output:/home/$USER/poky/build ## folder does not need to be around,
+          - ./build:/home/$USER/poky/build ## folder does not need to be around,
