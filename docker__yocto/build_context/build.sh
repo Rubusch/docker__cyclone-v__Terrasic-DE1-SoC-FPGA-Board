@@ -2,23 +2,29 @@
 ## resources:
 ## https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
-export MY_HOME="$(pwd)"
-export USER="$(whoami)"
-export YOCTODIR="${MY_HOME}/poky"
-export BUILDDIR="${YOCTODIR}/build"
+MY_HOME="$(pwd)"
+MY_USER="$(whoami)"
 
-sudo chown ${USER}:${USER} -R ${BUILDDIR}
+YOCTO_DIR="${MY_HOME}/poky"
+BUILD_DIR="${YOCTO_DIR}/build"
+
+for item in ${BUILD_DIR} ${YOCTO_DIR}; do
+    if [ ! "${MY_USER}" == "$( stat -c %U ${item} )" ]; then
+        ## may take some time
+        sudo chown ${MY_USER}:${MY_USER} -R ${item}
+    fi
+done
 
 ## source again, before start building
-cd ${YOCTODIR}
-source oe-init-build-env $BUILDDIR
+cd ${YOCTO_DIR}
+source oe-init-build-env $BUILD_DIR
 
 ## config files
-cp -arf ${YOCTODIR}/meta-lothars-configs/conf/bblayers.conf.sample ${BUILDDIR}/conf/bblayers.conf
-cp -arf ${YOCTODIR}/meta-lothars-configs/conf/local.conf.sample ${BUILDDIR}/conf/local.conf
+cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/bblayers.conf.sample ${BUILD_DIR}/conf/bblayers.conf
+cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/local.conf.sample ${BUILD_DIR}/conf/local.conf
 
 ## adjust config files
-sed "s/  ~\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILDDIR}/conf/bblayers.conf
+sed "s/  ~\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILD_DIR}/conf/bblayers.conf
 
 ## build
 bitbake core-image-minimal
