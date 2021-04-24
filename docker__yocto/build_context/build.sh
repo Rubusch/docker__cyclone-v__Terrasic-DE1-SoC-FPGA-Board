@@ -2,7 +2,7 @@
 ## resources:
 ## https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
-MY_HOME="$(pwd)"
+test -d "${MY_HOME}" || export MY_HOME="$(pwd)"
 MY_USER="$(whoami)"
 
 YOCTO_DIR="${MY_HOME}/poky"
