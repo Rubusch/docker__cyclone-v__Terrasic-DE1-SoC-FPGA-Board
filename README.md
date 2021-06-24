@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/Rubusch/docker__cyclone-v__de1-soc-fpga.svg?style=shield)](https://circleci.com/gh/Rubusch/docker__cyclone-v__de1-soc-fpga)
-[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 
 # Container for my Terrasic DE1-SoC FPGA Board (Altera Cyclone V)
@@ -110,6 +110,9 @@ $ git clone https://github.com/altera-opensource/u-boot-socfpga.git
 ```
 
 Load container and install sdk toolchain, example tag **20191104161353**  
+
+
+### Development
 
 ```
 $ docker-compose -f ./docker-compose.yml run --rm de1soc_yocto /bin/bash
