@@ -53,19 +53,15 @@ if [[ ! -L "${YOCTO_DIR}/meta-lothars-configs" ]]; then
     sed "s/~/\/home\/$USER/g" -i ${YOCTO_DIR}/meta-lothars-configs/conf/bblayers.conf.sample
 fi
 
-## build_dir
-mkdir -p ${BUILD_DIR}
-
-## config files
-cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/bblayers.conf.sample ${BUILD_DIR}/conf/bblayers.conf
-cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/local.conf.sample ${BUILD_DIR}/conf/local.conf
-
-## adjust config files
-sed "s/  ~\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILD_DIR}/conf/bblayers.conf
-
 ## source, to provide environment
 cd ${YOCTO_DIR}
 source oe-init-build-env $BUILD_DIR
+
+## config files
+mkdir -p ${BUILD_DIR}/conf
+cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/bblayers.conf.sample ${BUILD_DIR}/conf/bblayers.conf
+cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/local.conf.sample ${BUILD_DIR}/conf/local.conf
+sed "s/  \/home\/user\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILD_DIR}/conf/bblayers.conf
 
 ## build
 cd ${BUILD_DIR}
