@@ -9,9 +9,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ## in case docker complains for a not set USER, perhaps you forgot to use --build-arg USER=$USER
 ARG USER=""
 
-## the yocto branch
-ARG BRANCH_YOCTO="dunfell"
-
 
 ################################################################################
 ## set up apt fully functional
@@ -78,21 +75,8 @@ RUN chown $USER:$USER -R /home/$USER
 USER $USER
 
 WORKDIR /home/$USER
-RUN git clone -b $BRANCH_YOCTO git://git.yoctoproject.org/poky poky
-
-WORKDIR /home/$USER/poky
-RUN git clone -b $BRANCH_YOCTO git://git.openembedded.org/meta-openembedded
-RUN git clone -b $BRANCH_YOCTO https://github.com/meta-qt5/meta-qt5.git
-
-## development: adjustable meta-layer
-RUN git clone -b lothar/dunfell https://github.com/Rubusch/meta-altera.git
-## or use original
-#RUN git clone -b master https://github.com/kraj/meta-altera.git
-
-# provide proper config in own meta layer
-COPY meta-lothars-configs /home/$USER/poky/meta-lothars-configs
-RUN sudo chown $USER:$USER -R /home/$USER/poky
-RUN sed "s/~/\/home\/$USER/g" -i /home/$USER/poky/meta-lothars-configs/conf/bblayers.conf.sample
+RUN mkdir -p /home/$USER/poky
+RUN mkdir -p /home/$USER/meta-lothars-configs
 
 
 ################################################################################

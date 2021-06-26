@@ -3,7 +3,7 @@ version: '3.8'
 services:
     de1soc_yocto:
         container_name: de1soc_yocto
-        image: rubuschl/de1soc_yocto
+        image: ${USER}/de1soc_yocto
         build:
             context: build_context
             dockerfile: Dockerfile
@@ -20,4 +20,9 @@ services:
           - USER
 
         volumes:
-          - ./build:/home/$USER/poky/build ## folder does not need to be around,
+          - ~/.gitconfig:/home/$USER/.gitconfig
+          - ~/.ssh:/home/$USER/.ssh
+          - ./poky:/home/$USER/poky  ## folder does not need to be around
+          - type: bind
+            source: ./meta-lothars-configs ## folder must be around
+            target: /home/$USER/meta-lothars-configs

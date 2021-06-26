@@ -6,9 +6,9 @@ BBPATH = "${TOPDIR}"
 BBFILES ?= ""
 
 BBLAYERS ?= " \
-  ~/poky/meta \
-  ~/poky/meta-poky \
-  ~/poky/meta-yocto-bsp \
-  ~/poky/meta-altera \
-  ~/poky/meta-lothars-configs \
+  /home/user/poky/meta \
+  /home/user/poky/meta-poky \
+  /home/user/poky/meta-yocto-bsp \
+  /home/user/poky/meta-altera \
+  /home/user/poky/meta-lothars-configs \
   "
