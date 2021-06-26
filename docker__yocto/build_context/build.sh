@@ -17,7 +17,7 @@ BUILD_DIR="${YOCTO_DIR}/build"
 export BB_FLAGS=${1}
 
 ## permissions
-for item in ${YOCTO_DIR} ${SSH_DIR} ${MY_HOME}/.gitconfig; do
+for item in ${YOCTO_DIR} ${SSH_DIR} ${MY_HOME}/meta-lothars-configs ${MY_HOME}/.gitconfig; do
     if [ ! "${MY_USER}" == "$( stat -c %U ${item} )" ]; then
         ## may take some time
         sudo chown ${MY_USER}:${MY_USER} -R ${item}
