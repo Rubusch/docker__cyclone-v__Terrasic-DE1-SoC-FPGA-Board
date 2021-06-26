@@ -58,7 +58,6 @@ cd ${YOCTO_DIR}
 source oe-init-build-env $BUILD_DIR
 
 ## config files
-mkdir -p ${BUILD_DIR}/conf
 cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/bblayers.conf.sample ${BUILD_DIR}/conf/bblayers.conf
 cp -arf ${YOCTO_DIR}/meta-lothars-configs/conf/local.conf.sample ${BUILD_DIR}/conf/local.conf
 sed "s/  \/home\/user\/poky\//  \/home\/$(whoami)\/poky\//g" -i ${BUILD_DIR}/conf/bblayers.conf
