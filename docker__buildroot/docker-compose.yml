@@ -3,7 +3,7 @@ version: '3.8'
 services:
     de1soc_buildroot:
         container_name: de1soc_buildroot
-        image: rubuschl/de1soc_buildroot
+        image: ${USER}/de1soc_buildroot
         build:
             context: build_context
             dockerfile: Dockerfile
