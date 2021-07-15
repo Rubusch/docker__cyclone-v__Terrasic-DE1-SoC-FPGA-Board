@@ -10,7 +10,7 @@ jobs:
           - checkout
 
         ## buildroot
-          - run: cd ./docker__buildroot && docker-compose up
+          - run: cd ./docker__buildroot && docker-compose up --exit-code-from de1soc_buildroot
 
 
     build_yocto:
