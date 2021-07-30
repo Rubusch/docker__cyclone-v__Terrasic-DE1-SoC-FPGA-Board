@@ -20,8 +20,8 @@ services:
           - USER
 
         volumes:
-          - ~/.gitconfig:/home/$USER/.gitconfig
-          - ~/.ssh:/home/$USER/.ssh
+          - ~/.gitconfig:/home/$USER/.gitconfig:ro
+          - ~/.ssh:/home/$USER/.ssh:ro
           - ./poky:/home/$USER/poky  ## folder does not need to be around
           - type: bind
             source: ./meta-lothars-configs ## folder must be around
