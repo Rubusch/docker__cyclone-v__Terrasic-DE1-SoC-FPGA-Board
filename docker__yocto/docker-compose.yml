@@ -21,7 +21,9 @@ services:
 
         volumes:
           - ~/.gitconfig:/home/$USER/.gitconfig:ro
-          - ~/.ssh:/home/$USER/.ssh:ro
+          ## actually put ro, but exclude known_hosts
+          #- ~/.ssh:/home/$USER/.ssh:ro
+          - ~/.ssh:/home/$USER/.ssh
           - ./poky:/home/$USER/poky  ## folder does not need to be around
           - type: bind
             source: ./meta-lothars-configs ## folder must be around
