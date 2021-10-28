@@ -8,17 +8,18 @@ services:
             context: build_context
             dockerfile: Dockerfile
             args:
-                USER: $USER
-
-        user: $USER
+                USER: "${USER}"
+                UID: "${UID}"
+                GID: "${GID}"
+        user: "${UID}:${GID}"
         stdin_open: true          ## docker run -i
         tty: true                 ## docker run -t
-        working_dir: /home/$USER
+        working_dir: "/home/${USER}"
         #privileged: true
-
         environment:
           - USER
-
+        env_file:
+          - .env
         volumes:
           - ~/.gitconfig:/home/$USER/.gitconfig:ro
           ## actually put ro, but exclude known_hosts

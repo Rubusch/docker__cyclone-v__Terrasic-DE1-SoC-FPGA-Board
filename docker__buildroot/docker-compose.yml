@@ -8,15 +8,16 @@ services:
             context: build_context
             dockerfile: Dockerfile
             args:
-                USER: $USER
-        user: $USER              ## docker run --user=$USER
+                USER: "${USER}"
+                UID: "${UID}"
+                GID: "${GID}"
+        user: "${UID}:${GID}"    ## docker run --user=$USER
         stdin_open: true         ## docker run -i
         tty: true                ## docker run -t
         #privileged: true
-
         environment:
           - USER
-
+        env_file:
+          - .env
         volumes:
-          - ./output:/home/$USER/buildroot/output  ## folder does not need to be around
-          - ./dl:/home/$USER/buildroot/dl
+          - ./buildroot:/home/$USER/buildroot  ## folder does not need to be around

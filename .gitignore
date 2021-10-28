@@ -8,3 +8,9 @@ workspace
 output
 dl
 poky
+
+## docker base image
+sandbox
+
+## docker environment
+.env

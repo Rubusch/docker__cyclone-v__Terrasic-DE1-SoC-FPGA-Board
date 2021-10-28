@@ -30,11 +30,13 @@ https://github.com/altera-opensource/u-boot-socfpga.git
 ## Tools Needed
 
 ```
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-$ sudo chmod a+x /usr/local/bin/docker-compose
+$ sudo apt-get install -y libffi-dev libssl-dev
+$ sudo apt-get install -y python3-dev
+$ sudo apt-get install -y python3 python3-pip
+$ pip3 install docker-compose
 ```
 
-NB: Where 1.28.6 is the latest version (currently not supported by devian/ubuntu package management)  
+Make sure, ``~/.local`` is within ``$PATH`` or re-link e.g. it to ``/usr/local``.  
 
 
 ## Buildroot
@@ -42,8 +44,7 @@ NB: Where 1.28.6 is the latest version (currently not supported by devian/ubuntu
 ### Build
 
 ```
-$ cd ./docker__buildroot/
-$ docker-compose up
+$ DOCKERDIR=docker__buildroot ./setup.sh
 ```
 
 
@@ -67,8 +68,7 @@ It is fine for ``bitbake meta-toolchain``, but won't build the image (no correct
 ### Build
 
 ```
-$ cd ./docker__yocto/
-$ docker-compose up
+$ DOCKERDIR=docker__yocto ./setup.sh
 ```
 
 In case of a re-build, make sure to clean sufficiently before  

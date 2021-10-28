@@ -1,11 +1,9 @@
-#!/bin/bash -e
+#!/bin/sh -e
 ## resources:
 ## https://rocketboards.org/foswiki/Documentation/YoctoDoraBuildWithMetaAltera
 
 MY_USER="$(whoami)"
 test -d "${MY_HOME}" || export MY_HOME="$(pwd)"
-SSH_DIR="${MY_HOME}/.ssh"
-SSH_KNOWN_HOSTS="${SSH_DIR}/known_hosts"
 YOCTO_BRANCH="dunfell"
 YOCTO_DIR="${MY_HOME}/poky"
 BUILD_DIR="${YOCTO_DIR}/build"
@@ -16,24 +14,10 @@ BUILD_DIR="${YOCTO_DIR}/build"
 ## '-k --runall=fetch' for only download, don't stop on errors
 export BB_FLAGS=${1}
 
-## permissions
-for item in "${YOCTO_DIR}" "${SSH_DIR}" "${MY_HOME}/meta-lothars-configs"; do
-    if [ ! "${MY_USER}" == "$( stat -c %U ${item} )" ]; then
-        ## may take some time
-        sudo chown "${MY_USER}:${MY_USER}" -R "${item}"
-    fi
-done
-
-## ssh known_hosts
-touch "${SSH_KNOWN_HOSTS}"
-for item in "github.com" "bitbucket.org"; do
-    if [ "" == "$( grep ${item} -r ${SSH_KNOWN_HOSTS} )" ]; then
-        ssh-keyscan "${item}" >> "${SSH_KNOWN_HOSTS}"
-    fi
-done
+00_devenv.sh "${YOCTO_DIR}" "${MY_HOME}/meta-lothars-configs"
 
 ## initial clone
-if [[ "1" == "$(find ${YOCTO_DIR} | wc -l)" ]]; then
+if [ "1" = "$(find ${YOCTO_DIR} | wc -l)" ]; then
     cd ${MY_HOME}
     git clone -b "${YOCTO_BRANCH}" git://git.yoctoproject.org/poky "${YOCTO_DIR}"
 
@@ -48,7 +32,7 @@ if [[ "1" == "$(find ${YOCTO_DIR} | wc -l)" ]]; then
 fi
 
 ## our meta-... layer
-if [[ ! -L "${YOCTO_DIR}/meta-lothars-configs" ]]; then
+if [ ! -L "${YOCTO_DIR}/meta-lothars-configs" ]; then
     ln -s ${MY_HOME}/meta-lothars-configs ${YOCTO_DIR}/meta-lothars-configs
     sed "s/~/\/home\/$USER/g" -i ${YOCTO_DIR}/meta-lothars-configs/conf/bblayers.conf.sample
 fi
