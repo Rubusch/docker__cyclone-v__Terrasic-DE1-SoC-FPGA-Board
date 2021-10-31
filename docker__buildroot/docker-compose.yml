@@ -20,11 +20,11 @@ services:
         env_file:
           - .env
         volumes:
-         ## folders not need to be around
-         - ~/.gitconfig:/home/${USER}/.gitconfig:ro
-         - ~/.ssh:/home/${USER}/.ssh
-         - ./buildroot:/home/${USER}/buildroot
-         ## folder must be around
+          ## folders not need to be around
+          - ~/.gitconfig:/home/${USER}/.gitconfig:ro
+          - ~/.ssh:/home/${USER}/.ssh
+          - ./buildroot:/home/${USER}/buildroot
+          ## folder must be around
           - type: bind
             source: ./build_configs
             target: /home/$USER/configs
