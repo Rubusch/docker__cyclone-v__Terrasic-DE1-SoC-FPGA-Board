@@ -21,11 +21,14 @@ services:
         env_file:
           - .env
         volumes:
+          ## folders not need to be around
           - ~/.gitconfig:/home/$USER/.gitconfig:ro
-          ## actually put ro, but exclude known_hosts
-          #- ~/.ssh:/home/$USER/.ssh:ro
           - ~/.ssh:/home/$USER/.ssh
-          - ./poky:/home/$USER/poky  ## folder does not need to be around
+          - ./poky:/home/$USER/poky
+          ## folder must be around
           - type: bind
-            source: ./meta-lothars-configs ## folder must be around
+            source: ./build_configs
+            target: /home/$USER/configs
+          - type: bind
+            source: ./meta-lothars-configs
             target: /home/$USER/meta-lothars-configs
